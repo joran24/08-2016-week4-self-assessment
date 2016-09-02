@@ -1,7 +1,27 @@
 console.log('debug in the console of your index.html file');
 
 // define loop here:
+var loop = function(collection, callback){
+	if (Array.isArray(collection)){
+		for (var i = 0; i < collection.length; i++) {
+			callback(collection[i],i)
+		}
+	} else if (typeof collection === 'object'){
+		for (var key in collection){
+			callback(collection[key], key)
+		}
+	}
+}
 
+// predicate ODD function
+var isOdd = function(number){
+	return number % 2 === 1
+}
+
+//predicate THRESHOLD function
+var lowerThanThreshold = function(number){
+	return number < threshold === true
+}
 
 // we've written filterBy for you here:
 var filterBy = function(collection, predicate) {
@@ -16,10 +36,13 @@ var filterBy = function(collection, predicate) {
 
 // use filterBy on the `numbers collection` to return an array of odd numbers
 var numbers = [22, 25, 78, 61, 36, 981, 313];
+console.log(filterBy(numbers, isOdd))
+
 
 // use filterBy on the `numbers collection` to return an array of numbers that are smaller
 // than the threshold.
 var threshold = 75;
+console.log(filterBy(numbers,lowerThanThreshold))
 
 
 // use filterBy on the `people collection` to return an array of objects who's age is between 27 and 35.
